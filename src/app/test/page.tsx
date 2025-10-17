@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabaseClient';
 
 export default function TestPage() {
@@ -31,7 +32,7 @@ export default function TestPage() {
       
       // Test 2: Check if tables exist
       console.log('Checking table structure...');
-      const { data: tableCheck, error: tableError } = await supabase
+      const { error: tableError } = await supabase
         .from('job_applications')
         .select('id')
         .limit(1);
@@ -49,11 +50,11 @@ export default function TestPage() {
         📊 Current applications: ${data || 0}
       `);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Database connection failed:', error);
       setConnectionStatus('error');
       setMessage('❌ Database connection failed');
-      setDetails(`Error: ${error.message}`);
+      setDetails(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   };
 
@@ -97,18 +98,18 @@ export default function TestPage() {
           
           {connectionStatus === 'success' && (
             <div className="mt-4 space-y-2">
-              <a
+              <Link
                 href="/dashboard"
                 className="inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mr-3"
               >
                 Go to Dashboard
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/"
                 className="inline-block bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded"
               >
                 Back to Home
-              </a>
+              </Link>
             </div>
           )}
         </div>
