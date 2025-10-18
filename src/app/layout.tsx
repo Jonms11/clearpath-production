@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,9 +24,13 @@ export default function RootLayout({
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <div className="flex items-center">
-                    <div className="w-8 h-8 mr-2 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">
-                      CP
-                    </div>
+                    <Image 
+                      src="/clearpath-logo.png" 
+                      alt="ClearPath Logo" 
+                      width={32}
+                      height={32}
+                      className="mr-2"
+                    />
                     <h1 className="text-xl font-bold text-blue-600">ClearPath</h1>
                   </div>
                 </div>
