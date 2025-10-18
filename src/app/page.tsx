@@ -21,10 +21,10 @@
             </a>
             
             <a
-              href="/dashboard"
+              href="/demo"
               className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
             >
-              View Dashboard Demo
+              View Demo Dashboard
             </a>
           </div>
         </div>

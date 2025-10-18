@@ -3,6 +3,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabaseClient';
 import { Briefcase, Calendar, MapPin, DollarSign, Eye, Trash2 } from 'lucide-react';
+import type { User } from '@supabase/supabase-js';
+import EmailIntegration from './EmailIntegration';
+import EmailAnalyzer from './EmailAnalyzer';
 
 interface JobApplication {
   id: string;
@@ -46,7 +49,30 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
   const [error, setError] = useState<string>('');
+  const [user, setUser] = useState<User | null>(null);
   const supabase = createClient();
+
+  // Check authentication
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        window.location.href = '/login';
+        return;
+      }
+      setUser(user);
+      
+      // Set authentication status for Chrome extension (if available)
+      if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+        (window as any).chrome.storage.local.set({
+          user_authenticated: true,
+          user_id: user.id,
+          user_email: user.email
+        });
+      }
+    };
+    checkAuth();
+  }, [supabase]);
 
   const loadApplications = useCallback(async () => {
     try {
@@ -56,7 +82,7 @@ export default function Dashboard() {
       const { data, error: fetchError } = await supabase
         .from('job_applications')
         .select('*')
-        .order('created_at', { ascending: false });
+        .order('application_date', { ascending: false });
 
       if (fetchError) throw fetchError;
       setApplications(data || []);
@@ -213,6 +239,10 @@ export default function Dashboard() {
             ))}
           </div>
         </div>
+
+        {/* Email Integration Section */}
+        <EmailAnalyzer />
+        <EmailIntegration />
 
         {/* Applications List */}
         <div className="bg-white rounded-lg shadow">

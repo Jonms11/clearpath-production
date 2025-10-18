@@ -19,12 +19,22 @@ export default function RootLayout({
             <div className="flex justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <h1 className="text-xl font-bold text-blue-600">🚀 ClearPath</h1>
+                  <div className="flex items-center">
+                    <img 
+                      src="/icons/clearpath-logo-32.png" 
+                      alt="ClearPath Logo" 
+                      className="h-8 w-8 mr-2"
+                    />
+                    <h1 className="text-xl font-bold text-blue-600">ClearPath</h1>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <a href="/dashboard" className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
                   Dashboard
+                </a>
+                <a href="/login" className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                  Sign In
                 </a>
                 <a href="/privacy" className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
                   Privacy
