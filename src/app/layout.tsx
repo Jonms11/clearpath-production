@@ -22,7 +22,7 @@ export default function RootLayout({
                 <div className="flex-shrink-0">
                   <div className="flex items-center">
                     <Image 
-                      src="/icons/clearpath-logo-32.png" 
+                      src="/clearpath-logo.png" 
                       alt="ClearPath Logo" 
                       width={32}
                       height={32}
