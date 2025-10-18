@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabaseClient';
 import { Briefcase, Calendar, MapPin, DollarSign, Eye, Trash2 } from 'lucide-react';
-import type { User } from '@supabase/supabase-js';
 import EmailIntegration from './EmailIntegration';
 import EmailAnalyzer from './EmailAnalyzer';
 
@@ -49,7 +48,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
   const [error, setError] = useState<string>('');
-  const [user, setUser] = useState<User | null>(null);
   const supabase = createClient();
 
   // Check authentication
@@ -60,11 +58,10 @@ export default function Dashboard() {
         window.location.href = '/login';
         return;
       }
-      setUser(user);
       
       // Set authentication status for Chrome extension (if available)
-      if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
-        (window as any).chrome.storage.local.set({
+      if (typeof window !== 'undefined' && 'chrome' in window && (window as typeof window & { chrome: { storage: { local: { set: (data: Record<string, unknown>) => void } } } }).chrome?.storage) {
+        (window as typeof window & { chrome: { storage: { local: { set: (data: Record<string, unknown>) => void } } } }).chrome.storage.local.set({
           user_authenticated: true,
           user_id: user.id,
           user_email: user.email

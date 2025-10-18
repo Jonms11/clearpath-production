@@ -1,14 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabaseClient';
 
 export default function EmailIntegration() {
   const [loading, setLoading] = useState(false);
   const [emailEnabled, setEmailEnabled] = useState(false);
   const [message, setMessage] = useState('');
-  
-  const supabase = createClient();
 
   const enableEmailSync = async () => {
     setLoading(true);
@@ -28,8 +25,8 @@ export default function EmailIntegration() {
       //   }
       // });
       
-    } catch (error: any) {
-      setMessage('Error setting up email integration: ' + error.message);
+    } catch (error: unknown) {
+      setMessage('Error setting up email integration: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       setLoading(false);
     }
@@ -56,9 +53,9 @@ export default function EmailIntegration() {
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <h4 className="font-medium text-blue-900 mb-2">🚀 Smart Email Detection</h4>
             <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Automatically detect "Interview scheduled" emails</li>
-              <li>• Catch "Application received" confirmations</li>
-              <li>• Spot "Offer letter" and rejection emails</li>
+              <li>• Automatically detect &quot;Interview scheduled&quot; emails</li>
+              <li>• Catch &quot;Application received&quot; confirmations</li>
+              <li>• Spot &quot;Offer letter&quot; and rejection emails</li>
               <li>• Update job status without manual work</li>
             </ul>
           </div>

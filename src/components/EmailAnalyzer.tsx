@@ -261,7 +261,7 @@ export default function EmailAnalyzer() {
             ) : (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                 <p className="text-yellow-800 text-sm">
-                  🤔 Couldn't match this email to any of your tracked jobs. 
+                  🤔 Couldn&apos;t match this email to any of your tracked jobs. 
                   Make sure the company name or job title appears in the email.
                 </p>
               </div>
@@ -273,7 +273,7 @@ export default function EmailAnalyzer() {
       <div className="mt-4 p-3 bg-gray-50 rounded-lg">
         <p className="text-xs text-gray-600">
           💡 <strong>Tip:</strong> Include both the subject line and email body for best results. 
-          The analyzer looks for keywords like "interview scheduled", "offer letter", "unfortunately", etc.
+          The analyzer looks for keywords like &quot;interview scheduled&quot;, &quot;offer letter&quot;, &quot;unfortunately&quot;, etc.
         </p>
       </div>
     </div>

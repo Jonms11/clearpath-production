@@ -48,8 +48,8 @@ export default function AuthPage() {
       });
       
       if (error) throw error;
-    } catch (error: any) {
-      setMessage(error.message);
+    } catch (error: unknown) {
+      setMessage(error instanceof Error ? error.message : 'An error occurred');
       setLoading(false);
     }
   };
@@ -80,8 +80,8 @@ export default function AuthPage() {
         if (error) throw error;
         // Redirect handled by auth state change
       }
-    } catch (error: any) {
-      setMessage(error.message);
+    } catch (error: unknown) {
+      setMessage(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -98,7 +98,7 @@ export default function AuthPage() {
         <div className="max-w-md w-full bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-center mb-6">Welcome!</h2>
           <p className="text-center text-gray-600 mb-4">
-            You're logged in as {user.email}
+            You&apos;re logged in as {user.email}
           </p>
           <div className="space-y-3">
             <a

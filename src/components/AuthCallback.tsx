@@ -20,8 +20,8 @@ export default function AuthCallback() {
 
         if (session?.user) {
           // Set authentication status for Chrome extension (if available)
-          if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
-            (window as any).chrome.storage.local.set({
+          if (typeof window !== 'undefined' && 'chrome' in window && (window as typeof window & { chrome: { storage: { local: { set: (data: Record<string, unknown>) => void } } } }).chrome?.storage) {
+            (window as typeof window & { chrome: { storage: { local: { set: (data: Record<string, unknown>) => void } } } }).chrome.storage.local.set({
               user_authenticated: true,
               user_id: session.user.id,
               user_email: session.user.email
