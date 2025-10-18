@@ -5,6 +5,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "ClearPath - Job Application Tracker",
   description: "Automatically track your job applications across LinkedIn, Indeed, Glassdoor, and more job boards. Never lose track of an application again.",
+  icons: {
+    icon: '/favicon.ico',
+  }
 };
 
 export default function RootLayout({
@@ -21,8 +24,8 @@ export default function RootLayout({
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <div className="flex items-center">
-                    <div className="w-8 h-8 mr-2 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">
-                      C
+                    <div className="w-8 h-8 mr-2 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">
+                      CP
                     </div>
                     <h1 className="text-xl font-bold text-blue-600">ClearPath</h1>
                   </div>
