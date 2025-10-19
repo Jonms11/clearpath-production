@@ -47,9 +47,18 @@ export default function AuthPage() {
         }
       });
       
-      if (error) throw error;
+      if (error) {
+        console.error('Google OAuth error:', error);
+        if (error.message.includes('OAuth')) {
+          setMessage('❌ Google OAuth not configured. Please check the SUPABASE_GOOGLE_AUTH_SETUP.md guide.');
+        } else {
+          throw error;
+        }
+      }
     } catch (error: unknown) {
-      setMessage(error instanceof Error ? error.message : 'An error occurred');
+      console.error('Auth error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+      setMessage(`Authentication failed: ${errorMessage}. Check SUPABASE_GOOGLE_AUTH_SETUP.md for setup instructions.`);
       setLoading(false);
     }
   };
